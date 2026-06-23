@@ -231,12 +231,14 @@ img {
 
 /* Hero */
 .hero {
-  background: var(--ink);
+  background:
+    linear-gradient(rgba(22, 24, 29, 0.65), rgba(22, 24, 29, 0.65)),
+    url("background.png") 80% center / 450px no-repeat,
+    var(--ink);
   color: #f4f5f7;
   padding: 2rem 0;
 }
 .hero-inner {
-  max-width: 760px;
 }
 .eyebrow {
   font-family: var(--font-display);
@@ -355,8 +357,8 @@ img {
 .card-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
-  gap: 3rem;
-  margin-top: 3rem;
+  gap: 2rem;
+  margin-top: 2rem;
 }
 .card {
   background: var(--surface);
@@ -487,7 +489,7 @@ img {
   }
   /* Smaller logos so more than one fits across a narrow screen. */
   .logo-item {
-    height: 44px;
+    height: 96px;
     margin: 0 1.5rem;
   }
   /* Slightly smaller club logo in the stat band on phones. */
