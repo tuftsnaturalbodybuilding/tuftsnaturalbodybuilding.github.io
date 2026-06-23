@@ -52,7 +52,9 @@
       <nav id="primary-nav" class="primary-nav">
         <a href="#about">About</a>
         <a href="#what-we-do">What we do</a>
+        <a href="#competitions">Compete</a>
         <a href="#meetings">Meetings</a>
+        <a href="#team">Team</a>
         <a href="#join" class="nav-cta">Join</a>
       </nav>
     </div>
@@ -66,11 +68,11 @@
          To change the date, edit the text in .stat-label. -->
     <section id="total-lifted" class="stat-band">
       <div class="container stat-inner">
-        <img class="stat-logo" src="logoLarge.png" alt="Tufts Natural Bodybuilding Club logo" />
+        <img class="stat-logo" src="LogoLarge.png" alt="Tufts Natural Bodybuilding Club logo" />
         <div class="stat-copy">
-          <p class="stat-eyebrow">Together the club has moved</p>
+          <p class="stat-eyebrow">Together the club has lifted</p>
           <p class="stat-number" data-target="3300000">0</p>
-          <p class="stat-label">pounds lifted &middot; as of July 1</p>
+          <p class="stat-label">pounds &middot; as of July 1</p>
         </div>
         <!-- Club logo, sitting to the right of the number.
              Resize it with "height" in .stat-logo (style.css). -->
@@ -125,23 +127,18 @@
           </article>
 
           <article class="card">
-            <h3>Nutrition &amp; recovery support</h3>
-            <p>Workshops on eating for your goals, sleep, and training smart so progress sticks.</p>
-          </article>
-
-          <article class="card">
             <h3>Posing &amp; stage prep</h3>
             <p>Chasing a natural show? We run posing practice and prep guidance to get you stage-ready. Also shoutouts to get support for your upcoming show(s)!</p>
           </article>
 
           <article class="card">
-            <h3>Dieting done safe</h3>
-            <p>Crash diets and reckless cuts can wreck your hormones and your health. Members who've been through it help you cut or bulk in a way that's sustainable, physically and mentally.</p>
+            <h3>Safe dieting</h3>
+            <p>Crash diets and reckless cuts can wreck your hormones and your health. Members who've been through it help your approach in a way that's sustainable, physically and mentally.</p>
           </article>
 
           <article class="card">
-            <h3>Open to everyone</h3>
-            <p>"Natural" means we don't abuse performance-enhancing drugs, nothing more. Medical exemptions and gender-affirming care aren't abuse, and they are more than welcome here. Want to compete? We'll point you to inclusive organizations like the <a href="https://iatbp.org/" target="_blank" rel="noopener">IATBP</a>.</p>
+            <h3>Include everyone</h3>
+            <p>"Natural" means we don't abuse performance-enhancing drugs. Medical exemptions and gender-affirming care aren't abuse. All people from all backgrounds are welcome! We can also point you to inclusive federations like the <a href="https://iatbp.org/" target="_blank" rel="noopener">IATBP</a>.</p>
           </article>
 
           <article class="card">
@@ -149,7 +146,65 @@
             <p>We gather to stream and talk about the big shows, from Mr. Olympia and the Arnold Classic to national natural competitions. Come argue and talk all things bodybuilding, no experience required.</p>
           </article>
 
+          <article class="card">
+            <h3>Help eachother out!</h3>
+            <p>Whether you need a tripod, advice, or help breaking through a plateau. This is a community for like minded people to help eachother! This stuff is hard!</p>
+          </article>
+
         </div>
+      </div>
+    </section>
+
+    <!-- ================= UPCOMING COMPETITIONS ================= -->
+    <!-- White background (just ".section", no ".section-alt").
+         Each competitor is a "card". To add one, copy a whole <article>
+         block and edit the fields. The card reflows to a single column
+         on narrow screens, so nothing gets cut off. -->
+    <section id="competitions" class="section">
+      <div class="container">
+        <h2 class="section-title">Upcoming competitors &amp; competitions</h2>
+
+        <!-- ===== One card per competitor ===== -->
+        <!-- Copy this whole <article> to add another person.
+             - Swap the logo src for their federation (WNBF.png, INBA.png, etc.).
+             - Set their show date in data-target: "YYYY-MM-DDTHH:MM:SS"
+               (24-hour clock, local time). script.js fills in the numbers. -->
+        <article class="comp-card">
+          <div class="comp-field comp-field-name">
+            <span class="comp-field-label">Name</span>
+            <div class="comp-name">
+              <img class="comp-row-logo" src="OCB.png" alt="OCB" />
+              <span class="comp-person">Pierce Baker</span>
+            </div>
+          </div>
+
+          <div class="comp-field">
+            <span class="comp-field-label">Competition</span>
+            <div class="comp-value">OCB Battle of the Godz: <a href="https://ocbonline.com/events/ocb-battle-of-the-godz-pro-am-2/">Link</a></div>
+          </div>
+
+          <div class="comp-field">
+            <span class="comp-field-label">Days out</span>
+            <div class="countdown" data-target="2026-11-21T10:00:00" role="timer" aria-label="Days until competition">
+              <span class="countdown-unit"><span class="countdown-number" data-unit="days">--</span><span class="countdown-label">d</span></span>
+              <span class="countdown-unit"><span class="countdown-number" data-unit="hours">--</span><span class="countdown-label">h</span></span>
+              <span class="countdown-unit"><span class="countdown-number" data-unit="minutes">--</span><span class="countdown-label">m</span></span>
+              <span class="countdown-unit"><span class="countdown-number" data-unit="seconds">--</span><span class="countdown-label">s</span></span>
+            </div>
+          </div>
+
+          <div class="comp-field">
+            <span class="comp-field-label">Location</span>
+            <!-- EDIT this with the venue/city once it's confirmed. -->
+            <div class="comp-value">Warwick, RI</div>
+          </div>
+
+          <div class="comp-field comp-field-divisions">
+            <span class="comp-field-label">Competing in</span>
+            <div class="comp-value">Debut Classic Physique, Novice Classic Physique, Open Classic Physique</div>
+          </div>
+        </article>
+
       </div>
     </section>
 
@@ -165,6 +220,30 @@
       </div>
     </section>
 
+    <!-- ================= TEAM / POSITIONS (contact) ================= -->
+    <!-- Gray background (".section-alt"). One line per role.
+         Copy a .team-row block to add another officer. -->
+    <section id="team" class="section section-alt">
+      <div class="container narrow">
+        <p class="section-eyebrow">The team</p>
+        <h2 class="section-title">Positions &amp; contact</h2>
+
+        <div class="team-list">
+          <p class="team-row">
+            <span class="team-role">Founder, Interim President, Technical lead</span>
+            <span class="team-person">
+              Pierce Baker &middot;
+              <a href="mailto:pierce.baker@tufts.edu">pierce.baker@tufts.edu</a>
+            </span>
+          </p>
+        </div>
+
+        <p class="team-club-email">
+          Club email: <a href="mailto:tuftsnaturalbodybuildingclub@gmail.com">tuftsnaturalbodybuildingclub@gmail.com</a>
+        </p>
+      </div>
+    </section>
+
     <!-- ================= JOIN / CONTACT ================= -->
     <section id="join" class="section section-dark">
       <div class="container narrow">
@@ -176,7 +255,7 @@
         </p>
         <div class="actions">
           <!-- EDIT these links: your real club email and Instagram handle. -->
-          <a href="mailto:naturalbodybuilding@tufts.edu" class="btn btn-primary">Email the club</a>
+          <a href="mailto:tuftsnaturalbodybuildingclub@gmail.com" class="btn btn-primary">Email the club</a>
           <a href="https://instagram.com/" class="btn btn-ghost">Instagram</a>
         </div>
       </div>

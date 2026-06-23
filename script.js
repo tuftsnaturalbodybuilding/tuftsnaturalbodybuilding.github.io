@@ -8,6 +8,7 @@
      3. Fills in the current year in the footer
      4. Counts the "pounds lifted" number up when it scrolls in
      5. Loops the federation logos smoothly at any screen width
+     6. Counts down to the next competition
 
    It's a good place to start learning JavaScript: read the
    comments, change something, and reload your page to see it.
@@ -182,6 +183,46 @@ document.addEventListener("DOMContentLoaded", function () {
       resizeTimer = setTimeout(buildMarquee, 200);
     });
   }
+
+  /* ---------- 6. COMPETITION COUNTDOWNS ---------- */
+
+  // Each competitor's .countdown has its own data-target date, so every
+  // person counts down to their own show. We update them all once a second.
+  const countdowns = document.querySelectorAll(".countdown");
+
+  countdowns.forEach(function (countdown) {
+    // data-target looks like "2026-11-21T10:00:00" (local time).
+    const target = new Date(countdown.dataset.target).getTime();
+    if (isNaN(target)) return; // skip if the date is missing or mistyped
+
+    const daysEl = countdown.querySelector('[data-unit="days"]');
+    const hoursEl = countdown.querySelector('[data-unit="hours"]');
+    const minutesEl = countdown.querySelector('[data-unit="minutes"]');
+    const secondsEl = countdown.querySelector('[data-unit="seconds"]');
+
+    // Always show two digits (e.g. 7 -> "07") for hours/minutes/seconds.
+    function pad(n) {
+      return String(n).padStart(2, "0");
+    }
+
+    function update() {
+      let diff = target - Date.now(); // milliseconds remaining
+      if (diff < 0) diff = 0;         // never show negative time
+
+      const days = Math.floor(diff / 86400000);          // 86,400,000 ms in a day
+      const hours = Math.floor((diff % 86400000) / 3600000);
+      const minutes = Math.floor((diff % 3600000) / 60000);
+      const seconds = Math.floor((diff % 60000) / 1000);
+
+      if (daysEl) daysEl.textContent = days;
+      if (hoursEl) hoursEl.textContent = pad(hours);
+      if (minutesEl) minutesEl.textContent = pad(minutes);
+      if (secondsEl) secondsEl.textContent = pad(seconds);
+    }
+
+    update();                  // fill it in right away...
+    setInterval(update, 1000); // ...then keep it ticking every second
+  });
 
 });
 

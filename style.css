@@ -356,7 +356,7 @@ img {
 /* Card grid (What we do) */
 .card-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: 2rem;
   margin-top: 2rem;
 }
@@ -421,6 +421,112 @@ img {
 @keyframes logo-scroll {
   from { transform: translateX(0); }
   to   { transform: translateX(-50%); }
+}
+
+/* Upcoming competitions */
+/* Each competitor is a card. Inside, fields sit in a 2-column grid that
+   collapses to a single column on narrow screens (so nothing is cut off). */
+.comp-card {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.5rem 2rem;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 1.5rem 1.75rem;
+  margin-bottom: 1.5rem;
+}
+.comp-card:last-child {
+  margin-bottom: 0;
+}
+/* "Competing in" is long, so let it span the full width on its own line. */
+.comp-field-divisions {
+  grid-column: 1 / -1;
+}
+/* Small uppercase label above every field's value. */
+.comp-field-label {
+  display: block;
+  font-family: var(--font-display);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: 1rem;
+  color: var(--accent);
+  margin-bottom: 0.3rem;
+}
+.comp-value {
+  font-size: 1rem;
+}
+/* The name (with its federation logo). */
+.comp-name {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+.comp-person {
+  font-weight: 600;
+  font-size: 1.05rem;
+}
+.comp-row-logo {
+  height: 26px;            /* small, so it never dominates the name */
+  width: auto;
+  flex: 0 0 auto;
+}
+
+/* Days-out countdown — the value of the "Days out" field. */
+.countdown {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 0.1rem 0.7rem;
+}
+.countdown-unit {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.1rem;
+}
+.countdown-number {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.5rem;           /* same size as body text */
+  line-height: 1;
+  color: var(--ink);
+  font-variant-numeric: tabular-nums; /* digits stay an even width as they tick */
+}
+.countdown-label {
+  font-family: var(--font-display);
+  font-size: 0.8rem;
+  color: var(--muted);
+}
+
+/* Team / positions */
+.team-list {
+  margin-bottom: 1.5rem;
+}
+/* One row per officer: role on top, person + email below. */
+.team-row {
+  margin: 0 0 1rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--line);
+}
+.team-row:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+.team-role {
+  display: block;
+  font-family: var(--font-display);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  font-size: 0.9rem;
+  color: var(--accent);
+  margin-bottom: 0.15rem;
+}
+.team-person {
+  display: block;
+  font-size: 1.05rem;
+}
+.team-club-email {
+  font-size: 1.05rem;
+  margin: 0;
 }
 
 /* Meetings */
@@ -495,6 +601,16 @@ img {
   /* Slightly smaller club logo in the stat band on phones. */
   .stat-logo {
     height: 96px;
+  }
+  /* Stack the card's fields into one column so nothing is cut off. */
+  .comp-card {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    padding: 1.25rem 1.35rem;
+  }
+  /* Tighter gaps so the countdown units wrap neatly on small screens. */
+  .countdown {
+    gap: 0.2rem 0.7rem;
   }
 }
 
