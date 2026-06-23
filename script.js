@@ -7,6 +7,7 @@
      2. Closes that menu after you tap a link
      3. Fills in the current year in the footer
      4. Counts the "pounds lifted" number up when it scrolls in
+     5. Loops the federation logos smoothly at any screen width
 
    It's a good place to start learning JavaScript: read the
    comments, change something, and reload your page to see it.
@@ -111,6 +112,75 @@ document.addEventListener("DOMContentLoaded", function () {
         runCount();
       }
     }
+  }
+
+  /* ---------- 5. FEDERATIONS LOGO MARQUEE ---------- */
+
+  // We copy the row of logos enough times to more than fill the screen, then
+  // slide the whole row by exactly half its width. Because the two halves are
+  // identical, the reset is invisible — so the loop never "pops" or leaves a
+  // gap, no matter how wide the screen is.
+  const marquee = document.querySelector(".logo-marquee");
+  const track = marquee ? marquee.querySelector(".logo-track") : null;
+
+  if (marquee && track) {
+    const reduceMotion =
+      window.matchMedia &&
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    const SPEED = 45; // pixels per second — lower is slower
+
+    // Keep a pristine copy of the original logos to rebuild from.
+    const originals = Array.from(track.children).map(function (node) {
+      return node.cloneNode(true);
+    });
+
+    function appendSet(decorative) {
+      originals.forEach(function (node) {
+        const copy = node.cloneNode(true);
+        if (decorative) {
+          // Hide the duplicate copies from screen readers.
+          copy.setAttribute("alt", "");
+          copy.setAttribute("aria-hidden", "true");
+        }
+        track.appendChild(copy);
+      });
+    }
+
+    function buildMarquee() {
+      if (reduceMotion) return; // leave the tidy static row in place
+
+      // Lay out one set in a single line so we can measure its real width.
+      track.classList.add("is-animating");
+      track.innerHTML = "";
+      appendSet(false);
+
+      const setWidth = track.scrollWidth;
+      const viewport = marquee.clientWidth;
+      if (!setWidth || !viewport) return;
+
+      // Enough sets to cover the screen once = one "half"; double it.
+      const setsPerHalf = Math.max(1, Math.ceil(viewport / setWidth));
+
+      track.innerHTML = "";
+      for (let i = 0; i < setsPerHalf * 2; i++) {
+        appendSet(i !== 0); // first set keeps real alt text; rest are decorative
+      }
+
+      // Match the duration to the distance so the speed stays constant.
+      const halfWidth = setWidth * setsPerHalf;
+      track.style.setProperty("--marquee-duration", halfWidth / SPEED + "s");
+    }
+
+    // Run once the logo images have loaded (so their widths are known),
+    // and rebuild if the window is resized.
+    window.addEventListener("load", buildMarquee);
+
+    let resizeTimer;
+    window.addEventListener("resize", function () {
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(buildMarquee, 200);
+    });
   }
 
 });

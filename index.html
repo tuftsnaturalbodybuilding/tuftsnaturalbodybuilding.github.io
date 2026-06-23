@@ -62,14 +62,7 @@
 
     <!-- ================= HERO ================= -->
     <section class="hero">
-      <!-- Large club logo. It sits behind the words as a subtle backdrop.
-           alt="" + aria-hidden mean screen readers skip it (it's decorative).
-           To make it BOLDER or move it next to the title, see ".hero-logo"
-           in style.css — there's a note there. -->
-      <img class="hero-logo" src="logoLarge.png" alt="" aria-hidden="true" />
-
       <div class="container hero-inner">
-        <p class="eyebrow">Tufts University &middot; Student Club</p>
         <h1 class="hero-title">Tufts Natural<br />Bodybuilding Club</h1>
         <p class="hero-lede">
           A community for natural bodybuilders. Come train, prep for shows, and figure it out together. All levels welcome.
@@ -86,10 +79,15 @@
          To change the total, edit data-target below (digits only, no commas).
          To change the date, edit the text in .stat-label. -->
     <section id="total-lifted" class="stat-band">
-      <div class="container">
-        <p class="stat-eyebrow">Together the club has moved</p>
-        <p class="stat-number" data-target="3300000">0</p>
-        <p class="stat-label">pounds lifted &middot; as of July 1</p>
+      <div class="container stat-inner">
+        <div class="stat-copy">
+          <p class="stat-eyebrow">Together the club has moved</p>
+          <p class="stat-number" data-target="3300000">0</p>
+          <p class="stat-label">pounds lifted &middot; as of July 1</p>
+        </div>
+        <!-- Club logo, sitting to the right of the number.
+             Resize it with "height" in .stat-logo (style.css). -->
+        <img class="stat-logo" src="logoLarge.png" alt="Tufts Natural Bodybuilding Club logo" />
       </div>
     </section>
 
@@ -115,8 +113,7 @@
     <!-- ================= WHAT WE DO (cards) ================= -->
     <section id="what-we-do" class="section section-alt">
       <div class="container">
-        <p class="section-eyebrow">What we do</p>
-        <h2 class="section-title">A few ways to get involved</h2>
+        <h2 class="section-title what-we-do-title">What we do</h2>
 
         <!-- This grid reflows to one column on phones automatically. -->
         <div class="card-grid">
@@ -167,10 +164,9 @@
     </section>
 
     <!-- ================= FEDERATIONS (revolving logos) ================= -->
-    <!-- The logos scroll across the screen on a loop. They're listed TWICE
-         in the track so the loop is seamless — the second copy is hidden
-         from screen readers (alt="" aria-hidden). To add or remove a logo,
-         edit BOTH copies so they stay matched. Hovering pauses the scroll. -->
+    <!-- List each logo ONCE here. script.js automatically copies the row
+         enough times to fill the screen and loop with no gaps. To add or
+         remove a federation, just edit this one list. Hovering pauses it. -->
     <section id="federations" class="section section-alt">
       <div class="container narrow centered">
         <p class="section-eyebrow">The natural circuit</p>
@@ -180,16 +176,10 @@
 
       <div class="logo-marquee" aria-label="Natural bodybuilding federations">
         <div class="logo-track">
-          <!-- set 1 (the real, readable list) -->
           <img class="logo-item" src="WNBF.png"  alt="WNBF logo" />
           <img class="logo-item" src="INBA.png"  alt="INBA logo" />
           <img class="logo-item" src="OCB.png"   alt="OCB logo" />
           <img class="logo-item" src="IATBP.png" alt="IATBP logo" />
-          <!-- set 2 (exact duplicate, decorative — keeps the loop seamless) -->
-          <img class="logo-item" src="WNBF.png"  alt="" aria-hidden="true" />
-          <img class="logo-item" src="INBA.png"  alt="" aria-hidden="true" />
-          <img class="logo-item" src="OCB.png"   alt="" aria-hidden="true" />
-          <img class="logo-item" src="IATBP.png" alt="" aria-hidden="true" />
         </div>
       </div>
     </section>

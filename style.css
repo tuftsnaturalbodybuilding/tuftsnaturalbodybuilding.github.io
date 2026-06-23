@@ -140,6 +140,12 @@ img {
   margin-bottom: 1.25rem;
 }
 
+/* "What we do" — bigger and in Tufts blue (no eyebrow/subtitle above it). */
+.what-we-do-title {
+  color: var(--accent);
+  font-size: clamp(2.2rem, 6vw, 3.4rem);
+}
+
 /* ---------- 4. COMPONENTS ---------- */
 
 /* Header / nav */
@@ -225,31 +231,11 @@ img {
 
 /* Hero */
 .hero {
-  position: relative;      /* lets the logo sit behind the words */
-  overflow: hidden;        /* trims any logo overflow at the edges */
   background: var(--ink);
   color: #f4f5f7;
   padding: 6rem 0;
 }
-/* The big club logo behind the hero text.
-   WANT IT BOLDER / NEXT TO THE TITLE INSTEAD OF A FAINT BACKDROP?
-   Raise the opacity (try 0.6–1), and nudge "right" toward 4%. */
-.hero-logo {
-  position: absolute;
-  top: 50%;
-  right: -2%;
-  transform: translateY(-50%);
-  height: 118%;
-  width: auto;
-  max-width: 55%;
-  object-fit: contain;
-  opacity: 0.16;           /* subtle watermark */
-  pointer-events: none;    /* never blocks clicks on the buttons */
-  z-index: 0;
-}
 .hero-inner {
-  position: relative;      /* keeps the text above the logo */
-  z-index: 1;
   max-width: 760px;
 }
 .eyebrow {
@@ -322,8 +308,17 @@ img {
 .stat-band {
   background: var(--accent);
   color: #fff;
+  padding: 2.5rem 0;            /* shorter band */
+}
+.stat-inner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2.5rem;
+  flex-wrap: wrap;             /* logo drops below the number on narrow screens */
+}
+.stat-copy {
   text-align: center;
-  padding: 4rem 0;
 }
 .stat-eyebrow {
   font-family: var(--font-display);
@@ -331,12 +326,12 @@ img {
   letter-spacing: 0.14em;
   font-size: 0.9rem;
   opacity: 0.85;
-  margin: 0 0 0.5rem;
+  margin: 0 0 0.25rem;
 }
 .stat-number {
   font-family: var(--font-display);
   font-weight: 700;
-  font-size: clamp(3rem, 12vw, 7rem);
+  font-size: clamp(2.6rem, 9vw, 5rem);   /* smaller than before */
   line-height: 1;
   margin: 0;
   font-variant-numeric: tabular-nums; /* digits keep an even width while counting */
@@ -346,8 +341,14 @@ img {
   text-transform: uppercase;
   letter-spacing: 0.08em;
   font-size: 1rem;
-  margin: 0.75rem 0 0;
+  margin: 0.5rem 0 0;
   opacity: 0.9;
+}
+/* Club logo beside the number. Change "height" to resize it. */
+.stat-logo {
+  height: 130px;
+  width: auto;
+  flex: 0 0 auto;
 }
 
 /* Card grid (What we do) */
@@ -382,18 +383,28 @@ img {
   margin-top: 3rem;
   overflow: hidden;               /* hide the part of the track off-screen */
   /* Fade the logos out softly at both edges instead of cutting them dead. */
-  -webkit-mask-image: linear-gradient(to right, transparent, #000 12%, #000 88%, transparent);
-          mask-image: linear-gradient(to right, transparent, #000 12%, #000 88%, transparent);
+  -webkit-mask-image: linear-gradient(to right, transparent, #000 10%, #000 90%, transparent);
+          mask-image: linear-gradient(to right, transparent, #000 10%, #000 90%, transparent);
 }
+/* Default (and no-JavaScript) look: a tidy, centered row that wraps. */
 .logo-track {
   display: flex;
   align-items: center;
-  width: max-content;             /* let the row be as wide as its contents */
-  animation: logo-scroll 28s linear infinite;
+  justify-content: center;
+  flex-wrap: wrap;
+  row-gap: 1.5rem;
+}
+/* script.js adds .is-animating once it has copied the logos enough times
+   to fill the screen — only then do we switch on the seamless scroll. */
+.logo-track.is-animating {
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+  width: max-content;             /* as wide as all its contents */
+  animation: logo-scroll var(--marquee-duration, 30s) linear infinite;
 }
 /* Pause the scroll while someone is looking (hover or keyboard focus). */
-.logo-marquee:hover .logo-track,
-.logo-marquee:focus-within .logo-track {
+.logo-marquee:hover .logo-track.is-animating,
+.logo-marquee:focus-within .logo-track.is-animating {
   animation-play-state: paused;
 }
 .logo-item {
@@ -401,9 +412,10 @@ img {
   width: auto;                    /* ...and its width follows to stay in proportion */
   flex: 0 0 auto;
   object-fit: contain;
-  margin-right: 4.5rem;           /* even spacing; also what makes the loop seamless */
+  margin: 0 2.25rem;              /* even gaps between logos */
 }
-/* Moving exactly one full set (half the doubled track) makes it loop cleanly. */
+/* The track holds an even number of identical copies, so sliding it exactly
+   halfway lines the second half up perfectly with the first — no visible jump. */
 @keyframes logo-scroll {
   from { transform: translateX(0); }
   to   { transform: translateX(-50%); }
@@ -473,16 +485,14 @@ img {
   .hero {
     padding: 4rem 0;
   }
-  /* Keep the logo faint and out of the way of the text on small screens. */
-  .hero-logo {
-    opacity: 0.10;
-    right: -25%;
-    height: 90%;
-  }
   /* Smaller logos so more than one fits across a narrow screen. */
   .logo-item {
     height: 44px;
-    margin-right: 3rem;
+    margin: 0 1.5rem;
+  }
+  /* Slightly smaller club logo in the stat band on phones. */
+  .stat-logo {
+    height: 96px;
   }
 }
 
@@ -494,11 +504,9 @@ img {
   * {
     transition: none !important;
   }
-  /* Stop the logos from scrolling; let people swipe through them instead. */
-  .logo-track {
+  /* Stop the logos from scrolling; show them as a static, centered row. */
+  .logo-track,
+  .logo-track.is-animating {
     animation: none;
-  }
-  .logo-marquee {
-    overflow-x: auto;
   }
 }
